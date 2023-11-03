@@ -1,6 +1,4 @@
-# f23wb18bokkisam
+# s23db18bokkisam
 
-# Hosted Render Link : [RenderPage](https://f23wb18bokkisam.onrender.com)
+# Hosted Render Link : [RenderPage](https://s23db18bokkisam.onrender.com)
 
-**CLASS NAME: Student**   
-***CLASS ATTRIBUTES : NAME(STRING) ID(NUMBER) GRADE(NUMBER)***
