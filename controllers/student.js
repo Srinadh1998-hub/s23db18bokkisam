@@ -8,9 +8,7 @@ exports.student_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: student detail: ' + req.params.id);
 };
 // Handle student create on POST.
-exports.student_create_post = function(req, res) {
-res.send('NOT IMPLEMENTED: student create POST');
-};
+
 // Handle student delete form on DELETE.
 exports.student_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: student delete DELETE ' + req.params.id);
@@ -46,4 +44,26 @@ res.send(`{"error": ${err}}`);
 };
 
 
-    
+// Handle Costume create on POST.
+exports.student_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new student();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"costume_type":"goat", "cost":12, "size":"large"}
+    //s_NAME: String,
+    //s_ID: Number,
+    //s_GRADE: Number
+    document.s_NAME = req.body.s_NAME;
+    document.s_ID = req.body.s_ID;
+    document.s_GRADE = req.body.s_GRADE;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
