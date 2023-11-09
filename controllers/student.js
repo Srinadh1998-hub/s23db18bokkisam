@@ -1,5 +1,5 @@
 var student = require('../models/student');
-// List of all students
+// List of all student
 exports.student_list = function(req, res) {
 res.send('NOT IMPLEMENTED: student list');
 };
