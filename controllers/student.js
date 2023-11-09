@@ -20,7 +20,7 @@ exports.student_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: student update PUT' + req.params.id);
 };
 
-// List of all Costumes
+// List of all student
 exports.student_list = async function(req, res) {
     try{
     thestudent = await student.find();
@@ -31,4 +31,19 @@ exports.student_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+// VIEWS
+// Handle a show all view
+exports.student_view_all_Page = async function(req, res) {
+try{
+thestudent = await student.find();
+res.render('student', { title: 'student Search Results', results: thestudent });
+}
+catch(err){
+res.status(500);
+res.send(`{"error": ${err}}`);
+}
+};
+
+
     
