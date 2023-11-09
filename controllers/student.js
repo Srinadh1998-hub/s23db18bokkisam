@@ -19,3 +19,16 @@ res.send('NOT IMPLEMENTED: student delete DELETE ' + req.params.id);
 exports.student_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: student update PUT' + req.params.id);
 };
+
+// List of all Costumes
+exports.student_list = async function(req, res) {
+    try{
+    thestudent = await student.find();
+    res.send(thestudent);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+    
