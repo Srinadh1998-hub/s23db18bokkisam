@@ -44,14 +44,14 @@ res.send(`{"error": ${err}}`);
 };
 
 
-// Handle Costume create on POST.
+// Handle student create on POST.
 exports.student_create_post = async function(req, res) {
     console.log(req.body)
     let document = new student();
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
-    // {"costume_type":"goat", "cost":12, "size":"large"}
+    // {"student_type":"goat", "cost":12, "size":"large"}
     //s_NAME: String,
     //s_ID: Number,
     //s_GRADE: Number
@@ -65,5 +65,17 @@ exports.student_create_post = async function(req, res) {
     catch(err){
     res.status(500);
     res.send(`{"error": ${err}}`);
+    }
+    };
+
+    // for a specific student.
+exports.student_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await student.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
     }
     };
