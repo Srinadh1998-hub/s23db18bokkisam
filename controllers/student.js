@@ -35,7 +35,7 @@ exports.student_list = async function(req, res) {
 exports.student_view_all_Page = async function(req, res) {
 try{
 thestudent = await student.find();
-res.render('student', { title: 'student Search Results', results: thestudent });
+res.render('Student', { title: 'student Search Results', results: thestudent });
 }
 catch(err){
 res.status(500);
