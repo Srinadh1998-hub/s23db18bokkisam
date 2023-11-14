@@ -2,39 +2,42 @@ extends layout
 
 block content
   h1= title
-  - let studentid = toShow._id
-  - let s_NAME = toShow.s_NAME
-  - let s_ID = toShow.s_ID
-  - let s_GRADE = toShow.s_GRADE
+  if(toShow == null)
+    h2 No Students to update
+  else
+   - let studentid = toShow._id
+   - let s_NAME = toShow.s_NAME
+   - let s_ID = toShow.s_ID
+   - let s_GRADE = toShow.s_GRADE
 
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{studentid}
+   div.row(class='mb-2')
+     div.mr-1 ID is
+     div #{studentid}
 
-  - let actionid = "/resource/student/" + studentid
-  form(id='studentForm', action=actionid, method="PUT")
-    div.form-group
-      label.studentAttr(for='s_NAME') student Name
-      input#s_NAME(type='text', name='s_NAME', value=s_NAME)
-    div.form-group
-      label.studentAttr(for='s_ID') student ID
-      input#s_ID(type='number', name='s_ID', value=s_ID)
-    div.form-group
-      label.studentAttr(for='s_GRADE') student Grade
-      input#s_GRADE(type='number', name='s_GRADE', value=s_GRADE)
-    input(type="submit")
+   - let actionid = "/resource/student/" + studentid
+   form(id='studentForm', action=actionid, method="PUT")
+     div.form-group
+       label.studentAttr(for='s_NAME') student Name
+       input#s_NAME(type='text', name='s_NAME', value=s_NAME)
+     div.form-group
+       label.studentAttr(for='s_ID') student ID
+       input#s_ID(type='number', name='s_ID', value=s_ID)
+     div.form-group
+       label.studentAttr(for='s_GRADE') student Grade
+       input#s_GRADE(type='number', name='s_GRADE', value=s_GRADE)
+     input(type="submit")
 
-  script.
-    document.forms['studentForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      fetch(event.target.action, {
-          method: 'PUT',
-          body: new URLSearchParams(new FormData(event.target)) 
-      }).then((resp) => {
-          return resp.json();
-      }).then((body) => {
-          alert("Save succeeded")
-      }).catch((error) => {
-          alert("Save failed " + error )
-      });
-    });
+   script.
+     document.forms['studentForm'].addEventListener('submit', (event) => {
+       event.preventDefault();
+       fetch(event.target.action, {
+           method: 'PUT',
+           body: new URLSearchParams(new FormData(event.target)) 
+       }).then((resp) => {
+           return resp.json();
+       }).then((body) => {
+           alert("Save succeeded")
+       }).catch((error) => {
+           alert("Save failed " + error )
+       });
+     });
