@@ -52,7 +52,7 @@ res.send(`{"error": ${err}}`);
 }
 };
 
-// Handle building the view for creating a costume.
+// Handle building the view for creating a student.
 // No body, no in path parameter, no query.
 // Does not need to be async
 exports.student_create_Page = function(req, res) {
@@ -65,6 +65,22 @@ exports.student_create_Page = function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
    };
+
+// Handle building the view for updating a student.
+// query provides the id
+exports.student_update_Page = async function(req, res) {
+console.log("update view for item "+req.query.id)
+try{
+let result = await student.findById(req.query.id)
+res.render('studentupdate', { title: 'Student Update', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+
 
 // Handle student create on POST.
 exports.student_create_post = async function(req, res) {

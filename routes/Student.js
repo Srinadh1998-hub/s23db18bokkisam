@@ -17,3 +17,5 @@ module.exports = router;
 router.get('/detail', student_controlers.student_view_one_Page);
 
 router.get('/create', student_controlers.student_create_Page);
+
+router.get('/update', student_controlers.student_update_Page);
