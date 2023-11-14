@@ -110,3 +110,16 @@ exports.student_detail = async function(req, res) {
         failed`);
         }
         };
+
+// Handle a show one view with id specified by query
+exports.student_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await student.findById( req.query.id)
+    res.render('studentdetail',{ title: 'student Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };

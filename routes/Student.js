@@ -13,3 +13,5 @@ var router = express.Router();
 /* GET students */
 router.get('/', student_controlers.student_view_all_Page );
 module.exports = router;
+
+router.get('/detail', student_controlers.student_view_one_Page);

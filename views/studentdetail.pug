@@ -1,0 +1,20 @@
+extends layout
+block content
+ h1= title
+ - let studentid = toShow._id
+ - let s_NAME = toShow.s_NAME
+ - let s_ID = toShow.s_ID
+ - let s_GRADE = toShow.s_GRADE
+ div
+ div.row
+ div(class='studentAttr mr-3') collection ID is:
+ div #{studentid}
+ div.row
+ div(class='studentAttr mr-3') student Name is:
+ div #{s_NAME}
+ div.row
+ div(class='studentAttr mr-3') student ID is:
+ div #{s_ID}
+ div.row
+ div(class='studentAttr mr-3') student Grade is:
+ div #{s_GRADE}
