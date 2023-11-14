@@ -10,13 +10,22 @@ res.send('NOT IMPLEMENTED: student detail: ' + req.params.id);
 // Handle student create on POST.
 
 // Handle student delete form on DELETE.
-exports.student_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: student delete DELETE ' + req.params.id);
-};
+
 // Handle student update form on PUT.
-exports.student_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: student update PUT' + req.params.id);
-};
+
+// Handle student delete on DELETE.
+exports.student_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await student.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
 
 // List of all student
 exports.student_list = async function(req, res) {
@@ -79,3 +88,25 @@ exports.student_detail = async function(req, res) {
     res.send(`{"error": document for id ${req.params.id} not found`);
     }
     };
+
+
+
+    exports.student_update_put = async function(req, res) {
+        console.log(`update on id ${req.params.id} with body
+        ${JSON.stringify(req.body)}`)
+        try {
+        let toUpdate = await student.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.s_NAME)
+        toUpdate.s_NAME = req.body.s_NAME;
+        if(req.body.s_ID) toUpdate.s_ID = req.body.s_ID;
+        if(req.body.s_GRADE) toUpdate.s_GRADE = req.body.s_GRADE;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+        } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}
+        failed`);
+        }
+        };
