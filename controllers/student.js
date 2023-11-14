@@ -44,7 +44,7 @@ exports.student_list = async function(req, res) {
 exports.student_view_all_Page = async function(req, res) {
 try{
 thestudent = await student.find();
-res.render('Student', { title: 'student Search Results', results: thestudent });
+res.render('Student', { title: 'Student Search Results', results: thestudent });
 }
 catch(err){
 res.status(500);
@@ -73,6 +73,20 @@ console.log("update view for item "+req.query.id)
 try{
 let result = await student.findById(req.query.id)
 res.render('studentupdate', { title: 'Student Update', toShow: result });
+}
+catch(err){
+res.status(500)
+res.send(`{'error': '${err}'}`);
+}
+};
+
+// Handle a delete one view with id from query
+exports.student_delete_Page = async function(req, res) {
+console.log("Delete view for id " + req.query.id)
+try{
+result = await student.findById(req.query.id)
+res.render('studentdelete', { title: 'Student Delete', toShow:
+result });
 }
 catch(err){
 res.status(500)
@@ -145,7 +159,7 @@ exports.student_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
     result = await student.findById( req.query.id)
-    res.render('studentdetail',{ title: 'student Detail', toShow: result });
+    res.render('studentdetail',{ title: 'Student Detail', toShow: result });
     }
     catch(err){
     res.status(500)
