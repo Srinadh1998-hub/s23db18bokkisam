@@ -1,0 +1,28 @@
+extends layout
+block content
+ h1= title
+ form(id='studentForm', action="/resource/student", method="POST")
+  div.form-group
+   label.studentAttr(for='s_NAME') student NAME
+   input#s_NAME(type='text', name='s_NAME')
+  div.form-group
+   label.studentAttr(for='s_ID') student ID
+   input#s_ID(type='number', name='s_ID')
+  div.form-group
+   label.studentAttr(for='s_GRADE') student GRADE
+   input#s_GRADE(type='number', name='s_GRADE')
+  input(type="submit")
+ script.
+  document.forms['studentForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) 
+    }).then((resp) => {
+        return resp.json();
+    }).then((body) => {
+        alert("Save succeded")
+    }).catch((error) => {
+        alert("Save failed " + error )
+    });
+   });
