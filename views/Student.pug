@@ -2,26 +2,30 @@ extends layout
 
 block content
   h1= title
-  div(style='text-align: right;')
-   button(type='button' class="btn btn-info") Add New Instance
   - let items = results;
-   div.container-fluid
-    div.row
-     each Student,index in items 
-      div.col-sm-2(onClick=`buy(${index})`) #{Student.s_NAME}
-      div.col-sm-2(onClick=`buy(${index})`) #{Student.s_ID}
-      div.col-sm-2(onClick=`buy(${index})`) #{Student.s_GRADE}
-      div(style='text-align: right;')
-       button(type='button' class="btn btn-primary") Save
-       button(type='button' class="btn btn-success") Ok
-       button(type='button' class="btn btn-warning") update
-       button(type='button' class="btn btn-danger") delete 
-      br
-      hr
+  div(class="container-fluid")
+    div(class="row")
+      each student in items
+        - let destination = `dispatch("/student/update?id=${student._id}")`
+        div(class="row-sm-2 m-1")
+          | student #{student.s_NAME} (#{student.s_ID}) and student grade is #{student.s_GRADE}
+          button.btn(class="btn-primary ml-1", onclick=destination) Update
+    div.container-fluid
+      div.row
+        each student, index in items 
+          div.col-sm-2(onClick=`buy(${index})`) #{student.s_NAME}
+          div.col-sm-2(onClick=`buy(${index})`) #{student.s_ID}
+          div.col-sm-2(onClick=`buy(${index})`) #{student.s_GRADE}
+          br
+          hr
 
   script.
-        function buy(index)
-        {
-            alert(`You purchased Item ${index+1}`)
-        }
-  
+    function buy(index) {
+      alert(`You purchased Item ${index+1}`);
+    }
+
+  script.
+    function dispatch(path) {
+      window.location.href = path;
+    }
+

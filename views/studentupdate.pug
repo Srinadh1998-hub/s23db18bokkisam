@@ -25,7 +25,9 @@ block content
      div.form-group
        label.studentAttr(for='s_GRADE') student Grade
        input#s_GRADE(type='number', name='s_GRADE', value=s_GRADE)
-     input(type="submit")
+     button(class="btn btn-secondary m-2" onclick="submit()") Submit
+     button(class="btn btn-success m-2" onclick="cancel()") Cancel
+
 
    script.
      document.forms['studentForm'].addEventListener('submit', (event) => {
