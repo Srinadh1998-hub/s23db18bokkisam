@@ -3,13 +3,19 @@ extends layout
 block content
   h1= title
   - let items = results;
+  - let createins = `createInstance("/student/create")`
+  button.btn(class="btn-primary ml-1", onclick=createins) Create
   div(class="container-fluid")
     div(class="row")
       each student in items
         - let destination = `dispatch("/student/update?id=${student._id}")`
+        - let detailInstance = `detailins("/student/detail?id=${student._id}")`
+        - let deleteInstance = `deleteins("/student/delete?id=${student._id}")`
         div(class="row-sm-2 m-1")
           | student #{student.s_NAME} (#{student.s_ID}) and student grade is #{student.s_GRADE}
           button.btn(class="btn-primary ml-1", onclick=destination) Update
+          button.btn(class="btn-primary ml-1", onclick=detailInstance) Detail
+          button.btn(class="btn-primary ml-1", onclick=deleteInstance) Delete
     div.container-fluid
       div.row
         each student, index in items 
@@ -26,5 +32,19 @@ block content
 
   script.
     function dispatch(path) {
+      window.location.href = path;
+    }
+
+
+  script.
+    function createInstance(path) {
+      window.location.href = path;
+    }
+  script.
+    function detailins(path) {
+      window.location.href = path;
+    }
+  script.
+    function deleteins(path) {
       window.location.href = path;
     }
